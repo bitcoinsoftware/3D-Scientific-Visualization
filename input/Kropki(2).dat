@@ -1,0 +1,109 @@
+"To jest przykladowy plik z opisem probki ktora masz policzyc "
+"Masz 2 linijki na to, kazda linijka po 50 znakow"
+5                 # co_robic. 0, 1, 2  - oznacza ile rzeczy ma sie liczyc !!!
+# Naprezenie
+bicgstab              # metoda rozwiazywania A*x=b, sa  : cgs, bicgstab, bicg, gmres
+700                   # ile iteracji; <0 =>nie liczy, 0 =>napr=0 !!!, 
+3                     #Jak liczyc NPR; 1-Lin. Tetraedr, 2-Lin. Triliniowy, 3-Tricubic Pochodna
+# Piezoelektrycznosc
+500             # ile_iteracji; <0 nie liczy piezo tylko z pliku, 0 => pot.piez=0
+.true.          # czy warunki brzegowe von Neumana (true) czy Poissona (false)
+5               #jakiePiezo: 1, 2, 3 - stare liniowe Piezo, 4 - nowe liniowy piezo, 5- nowe nieliniowy piezo
+# Struktura elektronowa
+SCH                # Metoda obliczania poziomow: kp1, kp8, SCH, kp1el8hh, kp8el1hh
+JDExterRel      1   1   # dla EL: jak liczyc WW, ile energii; LanczosRel
+JDExterRel      -1  1   # dla LH;  JDExterRel, JDExterCmp, JDInterRel, JDInterCMP, LanczosRel
+JDExterRel      1   1   # dla HH;  Waruni brzegowe: 1-Poisson, 2-Neuman, 3-Periodyczne
+#typ materialu   - numer warstwy
+300.0           # Temperatura dla materialu
+5              # ile warstw
+GaAs     1    # pierwsza warstwa zawsze musi oznaczac podloze !!!
+InGaAs     2    # materialy moga byc: GaAs, InAs, AlAS, In_xGa_{1-x}As 
+ 0.30
+InAs     3    # Al_{1-x}Ga_xAs, Al_{1-x}In_xAs 
+InAs     4    # DLInGaAs, AL_xGa_yIn_{1-x-y}As, GaSb
+DLInGaAs       5    # QD  
+0.4               
+0.30  0.52 30.0 0.3    #
+# Wymiary BOXow numerycznych NPR, ENEkp8 oraz ENEkp1
+30   30    35          # NxNPR, NyNPR, NzNPR
+0.0   400.0       # wymiary XminNPR, XmaxNPR obszaru calkowania, Angstremy
+0.0   400.0       # wymiary YminNPR, YmaxNPR obszaru calkowania, Angstremy
+0.0   400.0       # wymiary ZminNPR, ZmaxNPR obszaru calkowania, Angstremy
+40   40    40          # NxENE , NyENE, NzENE, grid dla kp8
+0.0   400.0       # wymiary XminENE, XmaxENE obszaru calkowania, Angstremy
+0.0   400.0       # wymiary YminENE, YmaxENE obszaru calkowania, Angstremy
+0.0   400.0       # wymiary ZminENE, ZmaxENE obszaru calkowania, Angstremy
+40   40    40          # NxENE , NyENE, NzENE, grid dla kp1 !!!
+0.0   400.0       # wymiary XminENE, XmaxENE obszaru calkowania, Angstremy
+0.0   400.0       # wymiary YminENE, YmaxENE obszaru calkowania, Angstremy
+0.0   400.0       # wymiary ZminENE, ZmaxENE obszaru calkowania, Angstremy
+# Warstwy2D definuje nam warstwy typu WL oraz CAP
+ 2               # ilosc warstwp
+.false.    .false.     # czy warstwa w trybie NPR oraz  ENE
+2                      # nr_wastwy
+-1         5.0         # polozenie Z oraz grubosc w kierunku Z
+.false.    .false.     # czy warstwa w trybie NPR oraz  ENE
+2                      # nr_wastwy
+-1         5.0         # polozenie Z oraz grubosc w kierunku Z
+# Typy kropek 
+# Sfera lub Polsfera
+tk_SF                  # tu moze byc: tk_SF, tk_PS
+.false.    .false.     # czy krYopka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+100.0  100.0   100.0  50.0  # promienX, promienY, promienZ  wyokosc na jakiej odcinamy
+0.0                     # Obrot
+# Czworoscian
+tk_CZ
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+120   120             # pods_X, pods_Y
+60    60             # wysokosc i wysokosc scieta
+0.0             # obrot kropki
+# Szescian oraz stozka
+tk_SZ                 # tk_SZ lub tk_ST
+.true.    .true.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  -1.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+100.0  100.0   100.0   # pods_X, Y i Z
+0.0                  # obrot kropki
+# Stozek Sciety
+tk_SS
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+100.0  100.0   100.0   # pods_X, Y i Z
+50.0                   # wysokosc stozka scietego
+0.0                    # obrot kropki
+# Walec
+tk_WL
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+200  2              # promien i wysokosc walca
+0                   # obrot kropki 
+# PolWalca
+tk_PW
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+200  2              # promien i wysokosc walca
+0                   # obrot kropki 
+# Walec Sciety lub Graniastoslup prosty o podstawie Trojkata 
+tk_WS                 # tk_WS lub tk_GT
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+200  2              # cieciwa i wysokosc_obcieta  podstawy walca
+200                 # wysokosc walca
+0                   # obrot kropki 
+# Graniastoslup prosty o podstawie Rownolegloboku
+tk_GR                 # tk_WS lub tk_GT
+.false.    .false.     # czy kropka w trybie NPR  ENE
+-1.0   -1.0  60.0      # srodek kropki, <MinNPR !!! =>  w polowie
+4                      # nr_warstwy
+200  200   45          # podstawaX, podstawaY, kat miedzy bokami w stopniach
+200                   # wysokosc walca
+0                   # obrot kropki 
